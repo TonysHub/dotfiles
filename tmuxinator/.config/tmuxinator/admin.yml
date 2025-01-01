@@ -1,0 +1,16 @@
+name: admin
+root: ~
+
+windows:
+  - code:
+      root: ~/projects/god
+      panes:
+        - nvim .
+  - web:
+      root: ~/projects/god
+      panes:
+        - yarn dev
+  - git:
+      root: ~/projects/god
+      panes:
+        -

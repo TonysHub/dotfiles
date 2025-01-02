@@ -46,6 +46,7 @@ local options = {
 }
 
 vim.opt.shortmess:append("IsF")
+vim.opt.runtimepath:append("~/.config/nvim")
 
 vim.cmd([[
   augroup FileTypeOverrides
@@ -64,6 +65,9 @@ vim.cmd([[
 ]])
 
 vim.g.python3_host_prog = os.getenv("MY_PYTHON_PATH")
+vim.g.lazyvim_blink_main = false
+vim.g.snacks_animate = false
+
 for option, value in pairs(options) do
   vim.opt[option] = value
 end

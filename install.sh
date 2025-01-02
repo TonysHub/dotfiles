@@ -17,6 +17,7 @@ BREW_DEPENDENCIES=(
   neovim
   stow
   tmuxinator
+  pinentry-mac
 )
 
 # Install Homebrew dependencies

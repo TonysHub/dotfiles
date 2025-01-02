@@ -2,9 +2,7 @@ return {
   "folke/which-key.nvim",
   event = "VeryLazy",
   opts = {
-    win = {
-      layout = "classic",
-    },
+    preset = "classic",
   },
   keys = {
     {

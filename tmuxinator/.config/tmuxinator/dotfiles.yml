@@ -3,16 +3,14 @@ root: ~
 
 windows:
   - nvim:
-      layout: even-horizontal
+      root: ~
       panes:
-        - root: ~/.config/nvim
-          commands:
-            - nvim .
-        - root: ~
-          commands:
-            - nvim .tmux.conf
+        - nvim ~/.config/nvim
   - zshrc:
+      root: ~
       panes:
-        - root: ~
-          commands:
-            - nvim ~/.zshrc
+        - nvim .zshrc
+  - tmux:
+      root: ~
+      panes:
+        - nvim .tmux.conf

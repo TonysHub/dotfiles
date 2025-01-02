@@ -6,11 +6,11 @@ windows:
       root: ~/projects/god
       panes:
         - nvim .
+  - git:
+      root: ~/projects/god
+      panes:
+        - LazyGit
   - web:
       root: ~/projects/god
       panes:
         - yarn dev
-  - git:
-      root: ~/projects/god
-      panes:
-        -

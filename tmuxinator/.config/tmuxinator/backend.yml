@@ -6,11 +6,11 @@ windows:
       root: ~/projects/jyp
       panes:
         - nvim .
-  - logs:
-      root: ~/projects/jyp
-      panes:
-        - aws-vault exec qa -- docker compose -f docker/docker-compose.local.yml up
   - git:
       root: ~/projects/jyp
       panes:
-        -
+        - LazyGit
+  - docker:
+      root: ~/projects/jyp
+      panes:
+        - aws-vault exec qa -- docker compose -f docker/docker-compose.local.yml up

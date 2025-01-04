@@ -28,8 +28,6 @@ return {
       --   enabled = false,
       -- },
       vtsls = {
-        -- explicitly add default filetypes, so that we can extend
-        -- them in related extras
         filetypes = {
           "typescript",
           "typescriptreact",
@@ -96,24 +94,8 @@ return {
           },
         },
       },
-      -- eslint = {
-      --   filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-      --   settings = {
-      --     format = { enable = false },
-      --     lint = { enable = true },
-      --   },
-      -- },
       html = {
-        filetypes = { "html", "htmldjango" }, -- Add "django-html" as a recognized filetype
-        settings = {
-          html = {
-            suggest = {
-              completionItem = {
-                triggerCharacters = { "{{" }, -- Example: trigger completion on "{{" in Django templates
-              },
-            },
-          },
-        },
+        filetypes = { "html" },
       },
       pylsp = {
         filetypes = { "python" },
@@ -207,6 +189,16 @@ return {
           filetypes = servers[server_name] and servers[server_name].filetypes or nil,
         })
       end,
+    })
+
+    -- Manually setup sourcekit-lsp for Swift
+    local lspconfig = require("lspconfig")
+    lspconfig.sourcekit.setup({
+      cmd = { "sourcekit-lsp" },
+      filetypes = { "swift", "objective-c", "objective-cpp" },
+      root_dir = lspconfig.util.root_pattern("Package.swift", ".git"),
+      capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
+      on_attach = on_attach,
     })
   end,
 }

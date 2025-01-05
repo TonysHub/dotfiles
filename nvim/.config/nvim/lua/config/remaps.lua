@@ -80,3 +80,13 @@ nnoremap("<leader>dt", vim.diagnostic.goto_prev, { desc = "Go to previous diagno
 nnoremap("<leader>dn", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
 nnoremap("<leader>do", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 nnoremap("<leader>dl", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
+
+-- Search and replace line
+local function search_and_replace_line()
+  local search_char = vim.fn.getcharstr()
+  local replace_char = vim.fn.getcharstr()
+
+  vim.cmd("silent! s/" .. vim.fn.escape(search_char, "/") .. "/" .. vim.fn.escape(replace_char, "/") .. "/g")
+end
+
+nnoremap("<leader>slr", search_and_replace_line, { desc = "Search line and replace dynamically" })

@@ -10,65 +10,12 @@ return {
     require("mason-lspconfig").setup()
 
     local servers = {
-      -- ts_ls = {
-      --   settings = {
-      --     formatting = true,
-      --     formatoptions = {
-      --       tabSize = 2,
-      --       useTabs = false,
-      --     },
-      --   },
-      -- },
-      --- @deprecated -- tsserver renamed to ts_ls but not yet released, so keep this for now
-      --- the proper approach is to check the nvim-lspconfig release version when it's released to determine the server name dynamically
-      -- tsserver = {
-      --   enabled = false,
-      -- },
-      -- ts_ls = {
-      --   enabled = false,
-      -- },
-      vtsls = {
-        filetypes = {
-          "typescript",
-          "typescriptreact",
-          "typescript.tsx",
-        },
+      ts_ls = {
         settings = {
-          complete_function_calls = true,
-          vtsls = {
-            enableMoveToFileCodeAction = true,
-            autoUseWorkspaceTsdk = true,
-            experimental = {
-              completion = {
-                enableServerSideFuzzyMatch = true,
-              },
-            },
-          },
-          typescript = {
-            updateImportsOnFileMove = { enabled = "always" },
-            suggest = {
-              completeFunctionCalls = true,
-            },
-            inlayHints = {
-              enumMemberValues = { enabled = true },
-              functionLikeReturnTypes = { enabled = true },
-              parameterNames = { enabled = "literals" },
-              parameterTypes = { enabled = true },
-              propertyDeclarationTypes = { enabled = true },
-              variableTypes = { enabled = false },
-            },
-          },
-        },
-      },
-      efm = {
-        init_options = { documentFormatting = true },
-        filetypes = { "javascript", "javascriptreact", "jsx" },
-        settings = {
-          rootMarkers = { ".eslintrc.js", ".eslintrc.json", "package.json" },
-          languages = {
-            javascript = { { formatCommand = "prettier --no-semi --write", formatStdin = true } },
-            javascriptreact = { { formatCommand = "prettier --no-semi --write", formatStdin = true } },
-            jsx = { { formatCommand = "prettier --no-semi --write", formatStdin = true } },
+          formatting = true,
+          formatoptions = {
+            tabSize = 2,
+            useTabs = false,
           },
         },
       },

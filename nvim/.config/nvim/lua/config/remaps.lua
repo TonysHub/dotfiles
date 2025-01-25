@@ -90,3 +90,8 @@ local function search_and_replace_line()
 end
 
 nnoremap("<leader>slr", search_and_replace_line, { desc = "Search line and replace dynamically" })
+
+-- Delete marks
+nnoremap("<leader>dm", function()
+  vim.cmd("delmarks!")
+end, { desc = "Delete all marks" })

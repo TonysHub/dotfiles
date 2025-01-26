@@ -13,4 +13,4 @@ windows:
   - docker:
       root: ~/projects/jyp
       panes:
-        - aws-vault exec qa -- docker compose -f docker/docker-compose.local.yml up
+        -

@@ -1,6 +1,7 @@
 # Use dynamic paths
 export PATH="$HOME/.local/bin:$PATH"
 export PYTHONPATH="$HOME/Library/Python/3.11/lib/python/site-packages"
+export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 
 export EDITOR='vim'
 

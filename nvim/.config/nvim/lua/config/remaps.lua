@@ -73,7 +73,7 @@ vnoremap(">", ">gv")
 
 -- split buffers
 nnoremap("|", "<C-w>v", silent)
-nnoremap("-", "<C-w>s", silent)
+-- nnoremap("-", "<C-w>s", silent)
 
 -- Diagnostic keymaps
 nnoremap("<leader>dt", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })

@@ -6,6 +6,7 @@ return {
       "saadparwaiz1/cmp_luasnip",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-path",
+      "kristijanhusak/vim-dadbod-completion",
     },
     config = function()
       local cmp = require("cmp")
@@ -63,6 +64,12 @@ return {
           { name = "luasnip" },
           { name = "path" },
         },
+      })
+      cmp.setup.filetype("sql", {
+        sources = cmp.config.sources({
+          { name = "vim-dadbod-completion" },
+          { name = "buffer" },
+        }),
       })
     end,
   },

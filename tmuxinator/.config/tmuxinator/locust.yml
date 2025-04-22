@@ -1,0 +1,16 @@
+name: loadtest
+root: ~
+
+windows:
+  - code:
+      root: ~/projects/day6
+      panes:
+        - nvim .
+  - git:
+      root: ~/projects/day6
+      panes:
+        - LazyGit
+  - docker:
+      root: ~/projects/day6
+      panes:
+        -

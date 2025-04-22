@@ -1,0 +1,16 @@
+name: frontend
+root: ~
+
+windows:
+  - code:
+      root: ~/projects/nmixx
+      panes:
+        - nvim .
+  - git:
+      root: ~/projects/nmixx
+      panes:
+        - LazyGit
+  - web:
+      root: ~/projects/nmixx
+      panes:
+        -

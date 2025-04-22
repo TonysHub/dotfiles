@@ -50,7 +50,7 @@ nnoremap("<leader>bsa", "ggVG<CR>", { desc = "[b]uffer [s]elect [a]ll" })
 nnoremap("<leader>bf", vim.lsp.buf.format)
 
 -- terminal
-nnoremap("<leader>t", "<Cmd>sp<CR> <Cmd>term<CR> <Cmd>resize 13N<CR> i", silent)
+-- nnoremap("<leader>t", "<Cmd>sp<CR> <Cmd>term<CR> <Cmd>resize 13N<CR> i", silent)
 tnoremap("<C-c><C-c>", "<C-\\><C-n>", silent)
 tnoremap("<D-v>", function()
   local keys = vim.api.nvim_replace_termcodes('<C-\\><C-n>"+pi', true, false, true)

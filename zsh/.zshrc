@@ -1,3 +1,6 @@
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 # Use dynamic paths
 export PATH="$HOME/.local/bin:$PATH"
 export PYTHONPATH="$HOME/Library/Python/3.11/lib/python/site-packages"

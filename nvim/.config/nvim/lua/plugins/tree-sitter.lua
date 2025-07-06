@@ -44,6 +44,7 @@ return {
       "python",
       "query",
       "regex",
+      "swift",
       "toml",
       "tsx",
       "typescript",

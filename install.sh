@@ -18,6 +18,13 @@ BREW_DEPENDENCIES=(
   stow
   tmuxinator
   pinentry-mac
+  xcode-build-server 
+  xcbeautify 
+  ruby
+  pipx
+  jq 
+  coreutils
+  xcodegen
 )
 
 # Install Homebrew dependencies

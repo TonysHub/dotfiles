@@ -167,9 +167,23 @@ return {
     -- Manually setup sourcekit-lsp for Swift
     local lspconfig = require("lspconfig")
     lspconfig.sourcekit.setup({
-      cmd = { "sourcekit-lsp" },
+      cmd = { "xcrun", "sourcekit-lsp" }, -- no hard-coded paths
+      root_dir = lspconfig.util.root_pattern( -- recognise Xcode workspaces
+        "buildServer.json",
+        "Package.swift",
+        "*.xcworkspace",
+        "*.xcodeproj",
+        ".git"
+      ),
+      -- cmd = {
+      --   "/usr/bin/sourcekit-lsp",
+      --   "-Xswiftc",
+      --   "-Xfrontend",
+      --   "-Xswiftc",
+      --   "-disable-availability-checking",
+      -- },
       filetypes = { "swift", "objective-c", "objective-cpp" },
-      root_dir = lspconfig.util.root_pattern("Package.swift", "*.xcodeproj", ".git"),
+      -- root_dir = lspconfig.util.root_pattern("Package.swift", "*.xcodeproj", ".git"),
       capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
       on_attach = on_attach,
     })

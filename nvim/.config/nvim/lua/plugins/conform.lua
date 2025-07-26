@@ -7,7 +7,18 @@ return {
         swift = {
           command = "swift-format",
           args = function()
-            return { "format", "--in-place", "$FILENAME" }
+            local args = { "format", "--in-place", "$FILENAME" }
+            local project_config = vim.fn.getcwd() .. "/.swift-format"
+            local user_config = os.getenv("HOME") .. "/.config/.swift-format"
+
+            if vim.fn.filereadable(project_config) == 1 then
+              return args
+            elseif vim.fn.filereadable(user_config) == 1 then
+              table.insert(args, "--configuration")
+              table.insert(args, user_config)
+            end
+
+            return args
           end,
           stdin = false,
           tempfile_postfix = ".swift",
@@ -26,10 +37,6 @@ return {
         end,
         go = { "gofumpt" },
         elixir = { "mix" },
-        -- javascript = { { "prettierd", "prettier" } },
-        -- typescript = { "prettier" },
-        -- javascriptreact = { "prettier" },
-        -- typescriptreact = { "prettier" },
         svelte = { "prettier" },
         css = { "prettier" },
         html = { "prettier" },

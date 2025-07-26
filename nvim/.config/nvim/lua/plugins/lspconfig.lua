@@ -84,35 +84,11 @@ return {
       nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
       nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
       nmap("gr", function()
-        require("fzf-lua").lsp_references({ jump_to_single_result = true, ignore_current_line = true })
+        require("fzf-lua").lsp_references({ ignore_current_line = true })
       end, "[G]oto [R]eferences")
-      -- nmap("gr", function()
-      --   local fzf = require("fzf-lua")
-      --   local lsp = vim.lsp.buf
-      --
-      --   local called = false
-      --   lsp.references(nil, {
-      --     on_list = function(opts)
-      --       called = true
-      --       if #opts.items > 0 then
-      --         vim.fn.setqflist({}, " ", { title = "LSP References", items = opts.items })
-      --         fzf.quickfix()
-      --       else
-      --         -- fallback if LSP returns empty
-      --         local word = vim.fn.expand("<cword>")
-      --         fzf.grep({ search = word })
-      --       end
-      --     end,
-      --   })
-      --   -- fallback in case on_list is never called (some LSPs don't call if empty)
-      --   vim.defer_fn(function()
-      --     if not called then
-      --       local word = vim.fn.expand("<cword>")
-      --       fzf.grep({ search = word })
-      --     end
-      --   end, 200)
-      -- end, "[G]oto [R]eferences (fallback grep)")
-      nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
+      nmap("gd", function()
+        require("fzf-lua").lsp_definitions()
+      end, "[G]oto [D]efinition")
       nmap("gI", function()
         require("fzf-lua").lsp_implementations()
       end, "[G]oto [I]mplementation")
@@ -167,23 +143,9 @@ return {
     -- Manually setup sourcekit-lsp for Swift
     local lspconfig = require("lspconfig")
     lspconfig.sourcekit.setup({
-      cmd = { "xcrun", "sourcekit-lsp" }, -- no hard-coded paths
-      root_dir = lspconfig.util.root_pattern( -- recognise Xcode workspaces
-        "buildServer.json",
-        "Package.swift",
-        "*.xcworkspace",
-        "*.xcodeproj",
-        ".git"
-      ),
-      -- cmd = {
-      --   "/usr/bin/sourcekit-lsp",
-      --   "-Xswiftc",
-      --   "-Xfrontend",
-      --   "-Xswiftc",
-      --   "-disable-availability-checking",
-      -- },
+      cmd = { "xcrun", "sourcekit-lsp" },
+      root_dir = lspconfig.util.root_pattern("Package.swift", ".git"),
       filetypes = { "swift", "objective-c", "objective-cpp" },
-      -- root_dir = lspconfig.util.root_pattern("Package.swift", "*.xcodeproj", ".git"),
       capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
       on_attach = on_attach,
     })

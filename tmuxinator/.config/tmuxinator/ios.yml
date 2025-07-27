@@ -1,0 +1,16 @@
+name: ios
+root: ~
+
+windows:
+  - code:
+      root: ~/projects/Suzy
+      panes:
+        - nvim .
+  - git:
+      root: ~/projects/Suzy
+      panes:
+        - LazyGit
+  - terminal:
+      root: ~/projects/Suzy
+      panes:
+        -

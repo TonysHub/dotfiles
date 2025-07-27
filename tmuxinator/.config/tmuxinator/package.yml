@@ -1,0 +1,16 @@
+name: package
+root: ~
+
+windows:
+  - code:
+      root: ~/projects/Loft
+      panes:
+        - nvim .
+  - git:
+      root: ~/projects/Loft
+      panes:
+        - LazyGit
+  - terminal:
+      root: ~/projects/Loft
+      panes:
+        -

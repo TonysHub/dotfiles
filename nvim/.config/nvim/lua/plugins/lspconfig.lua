@@ -142,12 +142,23 @@ return {
 
     -- Manually setup sourcekit-lsp for Swift
     local lspconfig = require("lspconfig")
+
     lspconfig.sourcekit.setup({
       cmd = { "xcrun", "sourcekit-lsp" },
-      root_dir = lspconfig.util.root_pattern("Package.swift", ".git"),
+      root_dir = lspconfig.util.root_pattern("Package.swift", ".git", "*.xcodeproj", "*.xcworkspace"),
       filetypes = { "swift", "objective-c", "objective-cpp" },
-      capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
-      on_attach = on_attach,
+      capabilities = require("cmp_nvim_lsp").default_capabilities(),
+      on_attach = function(client, bufnr)
+        on_attach(client, bufnr) -- if you're chaining your custom keymaps/etc
+
+        vim.api.nvim_create_autocmd("BufWritePost", {
+          buffer = bufnr,
+          callback = function()
+            local params = vim.lsp.util.make_text_document_params()
+            vim.lsp.buf_request(0, "textDocument/didSave", { textDocument = params }, function() end)
+          end,
+        })
+      end,
     })
   end,
 }

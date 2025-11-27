@@ -5,16 +5,24 @@ export LC_ALL=en_US.UTF-8
 export PATH="$HOME/.local/bin:$PATH"
 export PYTHONPATH="$HOME/Library/Python/3.11/lib/python/site-packages"
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 export EDITOR='vim'
 
 # Source sensitive configurations
 [ -f ~/.env ] && source ~/.env
 
+export NVM_DIR="$HOME/.nvm"
+source "$(brew --prefix nvm)/nvm.sh"
+
+
 # Aliases
 alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
 alias manage="docker compose -f docker/docker-compose.dev.yml exec web python manage.py"
 alias start="tmuxinator start"
+alias proxy="mitmweb --set validate_inbound_headers=false"
 
 # direnv
 eval "$(direnv hook zsh)"
@@ -34,3 +42,4 @@ python_dir_init() {
         echo "No .venv directory found in $target_dir. MY_PYTHON_PATH unset."
     fi
 }
+

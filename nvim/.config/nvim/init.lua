@@ -5,4 +5,7 @@ vim.g.copilot_assume_mapped = true
 
 vim.loader.enable()
 
+-- Ensure tree-sitter site directory is in runtimepath
+vim.opt.runtimepath:append(vim.fn.stdpath("data") .. "/site")
+
 require("config")

@@ -83,62 +83,45 @@
 
 return {
   "nvim-treesitter/nvim-treesitter",
-  branch = "main",
-  lazy = false, -- load eagerly; this avoids rtp / timing weirdness
+  branch = "master", -- use the stable branch; fine for parser files
+  lazy = false, -- load eagerly
   build = ":TSUpdate",
 
   config = function()
-    -- List of languages / filetypes you care about
-    local parsers = {
-      "bash",
-      "c",
-      "diff",
-      "graphql",
-      "html",
-      "http",
-      "javascript",
-      "jsdoc",
-      "json",
-      "jsonc",
-      "lua",
-      "luadoc",
-      "luap",
-      "markdown",
-      "markdown_inline",
-      "printf",
-      "python",
-      "query",
-      "regex",
-      "swift",
-      "toml",
-      "tsx",
-      "typescript",
-      "vim",
-      "vimdoc",
-      "xml",
-      "yaml",
-    }
+    -- Make sure the plugin module exists
+    local ok, _ = pcall(require, "nvim-treesitter")
+    if not ok then
+      vim.notify("nvim-treesitter not found", vim.log.levels.ERROR)
+      return
+    end
 
-    local ts = require("nvim-treesitter")
+    -- 1) Auto-attach Treesitter to every buffer where a parser exists
+    vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+      group = vim.api.nvim_create_augroup("ts_auto_attach", { clear = true }),
+      callback = function(args)
+        local buf = args.buf
+        if not vim.api.nvim_buf_is_valid(buf) then
+          return
+        end
 
-    -- 1) Initialize nvim-treesitter (main-branch API)
-    ts.setup()
+        local ft = vim.bo[buf].filetype
+        if not ft or ft == "" then
+          return
+        end
 
-    -- 2) Ensure parsers are installed / updated (async-ish, with timeout)
-    vim.defer_fn(function()
-      ts.install(parsers):wait(300000) -- up to 5 minutes, returns early when done
-    end, 0)
+        -- Try to map filetype -> TS language (e.g. typescriptreact -> tsx)
+        local ok_lang, lang = pcall(vim.treesitter.language.get_lang, ft)
+        if not ok_lang or not lang then
+          -- fallback: try using the filetype directly
+          lang = ft
+        end
 
-    -- 3) Attach Treesitter when opening files of those types
-    vim.api.nvim_create_autocmd("FileType", {
-      pattern = parsers,
-      callback = function()
-        -- No args: use current buffer + its filetype → correct parser
-        vim.treesitter.start()
+        -- Silently try to start TS for this buffer
+        pcall(vim.treesitter.start, buf, lang)
       end,
     })
 
-    -- (Optional) Tiny helper to debug whether TS is attached
+    -- 2) Helper: check if TS is attached to the current buffer
     vim.api.nvim_create_user_command("TSCurrentLang", function()
       local hi = require("vim.treesitter.highlighter").active[vim.api.nvim_get_current_buf()]
       if hi and hi.tree then

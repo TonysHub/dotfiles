@@ -3,14 +3,30 @@ return {
     "rcarriga/nvim-notify",
     config = function()
       local notify = require("notify")
-      notify.setup({ fps = 120, render = "minimal", timeout = 500 })
+      notify.setup({
+        fps = 120,
+        render = "minimal",
+        timeout = 500,
+      })
+
+      -- Make nvim-notify the global notifier
+      vim.notify = notify
     end,
   },
+
   {
     "folke/noice.nvim",
-    dependencies = { "MunifTanjim/nui.nvim" },
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    },
     config = function()
       require("noice").setup({
+        -- 👇 turn off Noice's own notify override
+        notify = {
+          enabled = false,
+        },
+
         cmdline = {
           format = {
             bash = {
@@ -33,6 +49,7 @@ return {
             },
           },
         },
+
         lsp = {
           enabled = true,
           progress = {
@@ -43,16 +60,19 @@ return {
             ["vim.lsp.util.stylize_markdown"] = true,
             ["cmp.entry.get_documentation"] = true,
           },
-          icons_enabled = true, -- Enable icons for LSP messages
+          icons_enabled = true,
         },
+
         presets = {
-          bottom_search = true, -- use a classic bottom cmdline for search
-          command_palette = true, -- position the cmdline and popupmenu together
-          long_message_to_split = true, -- long messages will be sent to a split
-          inc_rename = false, -- enables an input dialog for inc-rename.nvim
-          lsp_doc_border = false, -- add a border to hover docs and signature help
+          bottom_search = true,
+          command_palette = true,
+          long_message_to_split = true,
+          inc_rename = false,
+          lsp_doc_border = false,
         },
+
         throttle = 1000 / 120,
+
         routes = {
           {
             filter = {
@@ -63,6 +83,7 @@ return {
             opts = { skip = true },
           },
         },
+
         views = {
           cmdline_popup = {
             position = { row = vim.o.lines * 0.32, col = "50%" },
@@ -75,7 +96,6 @@ return {
             win_options = {
               winhighlight = {
                 Normal = "Normal",
-                -- FloatBorder = "DiagnosticInfo",
               },
             },
           },

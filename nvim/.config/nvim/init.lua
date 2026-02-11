@@ -1,8 +1,7 @@
-vim.env.LANG = "en_US.UTF-8"
+require("config.lazy")
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-vim.g.copilot_assume_mapped = true
+vim.g.mapleader = " "
+vim.g.skip_ts_context_commentstring_module = true
 
 vim.loader.enable()
-
-require("config")

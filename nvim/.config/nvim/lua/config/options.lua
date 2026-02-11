@@ -1,6 +1,3 @@
--- Options are automatically loaded before lazy.nvim startup
--- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
--- Add any additional options here
 local options = {
   autoindent = true,
   backup = false,
@@ -20,13 +17,13 @@ local options = {
   incsearch = true,
   mouse = "a",
   number = true,
-  numberwidth = 2,
+  numberwidth = 4,
   scrolloff = 15,
   shiftwidth = 4,
   showmatch = true,
   showmode = false,
   showtabline = 0,
-  signcolumn = "no",
+  signcolumn = "yes",
   smartcase = true,
   smartindent = true,
   splitbelow = true,
@@ -46,7 +43,6 @@ local options = {
 }
 
 vim.opt.shortmess:append("IsF")
-vim.opt.runtimepath:append("~/.config/nvim")
 
 vim.cmd([[
   augroup FileTypeOverrides
@@ -60,14 +56,8 @@ vim.cmd([[
   autocmd FileType html setlocal shiftwidth=2
   autocmd FileType css setlocal shiftwidth=2
   autocmd FileType lua setlocal shiftwidth=2
-  autocmd FileType go setlocal shiftwidth=4 tabstop=4
-  autocmd FileType swift setlocal shiftwidth=4 tabstop=4
   augroup END
 ]])
-
-vim.g.python3_host_prog = os.getenv("MY_PYTHON_PATH")
-vim.g.lazyvim_blink_main = false
-vim.g.snacks_animate = false
 
 for option, value in pairs(options) do
   vim.opt[option] = value

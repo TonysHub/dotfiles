@@ -43,6 +43,7 @@ local options = {
 }
 
 vim.opt.shortmess:append("IsF")
+vim.g.copilot_assume_mapped = true
 
 vim.cmd([[
   augroup FileTypeOverrides

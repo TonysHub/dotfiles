@@ -94,7 +94,7 @@ vnoremap(">", ">gv")
 
 -- split buffers
 nnoremap("|", "<C-w>v", silent)
-nnoremap("-", "<C-w>s", silent)
+-- nnoremap("-", "<C-w>s", silent)
 
 -- Diagnostic keymaps
 nnoremap("<leader>do", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })

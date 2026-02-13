@@ -1,0 +1,17 @@
+name: itlab
+root: ~
+
+windows:
+  - code:
+      root: ~/projects/itlab
+      panes:
+        - nvim .
+  - git:
+      root: ~/projects/itlab/
+      panes:
+        - LazyGit
+  - docker:
+      root: ~/projects/itlab/
+      panes:
+        -
+

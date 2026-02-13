@@ -62,8 +62,10 @@ nnoremap("<leader>y", [["+y]])
 vnoremap("<leader>y", [["+y]])
 
 -- select all
-vnoremap("<leader>g", "ggVG<CR>", silent)
-nnoremap("<leader>g", "ggVG<CR>", silent)
+-- vnoremap("<leader>g", "ggVG<CR>", silent)
+-- nnoremap("<leader>g", "ggVG<CR>", silent)
+vnoremap("<leader>bsa", "ggVG<CR>", { desc = "[b]uffer [s]elect [a]ll" })
+nnoremap("<leader>bsa", "ggVG<CR>", { desc = "[b]uffer [s]elect [a]ll" })
 
 -- apply formatting
 -- nnoremap("<leader>f", vim.lsp.buf.format)

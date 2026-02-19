@@ -18,8 +18,8 @@ return {
                 yapf = { enabled = false },
 
                 -- linting
-                pycodestyle = { enabled = true, ignore = { "E501" } },
-                flake8 = { enabled = true, ignore = { "E501" } },
+                pycodestyle = { enabled = true, ignore = { "E501", "W503" } },
+                flake8 = { enabled = true, ignore = { "E501", "W503" } },
                 pylint = { enabled = false },
                 pyflakes = { enabled = false },
               },

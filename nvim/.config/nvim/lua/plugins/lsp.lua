@@ -3,25 +3,24 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        -- disable pyright
-        pyright = false,
-
-        -- enable python lsp server
-        pylsp = {
+        -- LazyVim's Python extra enables BasedPyright and Ruff.
+        -- Keep Jedi/pylsp from answering the same navigation requests.
+        pylsp = { enabled = false },
+        basedpyright = {
+          before_init = function(_, config)
+            local python = require("config.python").interpreter(config.root_dir)
+            config.settings = config.settings or {}
+            config.settings.python = config.settings.python or {}
+            -- Respect an explicitly configured interpreter (including VenvSelect).
+            config.settings.python.pythonPath = config.settings.python.pythonPath or python
+          end,
           settings = {
-            pylsp = {
-              plugins = {
-                -- formatting
-                mccabe = { enabled = true, threshold = 20 },
-                black = { enabled = false },
-                autopep8 = { enabled = false },
-                yapf = { enabled = false },
-
-                -- linting
-                pycodestyle = { enabled = true, ignore = { "E501", "W503" } },
-                flake8 = { enabled = true, ignore = { "E501", "W503" } },
-                pylint = { enabled = false },
-                pyflakes = { enabled = false },
+            basedpyright = {
+              -- Ruff owns import cleanup; leave navigation/type analysis here.
+              disableOrganizeImports = true,
+              analysis = {
+                diagnosticMode = "openFilesOnly",
+                typeCheckingMode = "standard",
               },
             },
           },

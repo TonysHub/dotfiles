@@ -1,3 +1,7 @@
+-- Use LazyVim's maintained Python integration: navigation/types + native Ruff.
+vim.g.lazyvim_python_lsp = "basedpyright"
+vim.g.lazyvim_python_ruff = "ruff"
+
 local options = {
   autoindent = true,
   backup = false,

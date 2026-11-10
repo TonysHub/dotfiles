@@ -2,6 +2,17 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = {
+      setup = {
+        basedpyright = function()
+          Snacks.util.lsp.on({ name = "basedpyright" }, function(_, client)
+            -- Keep navigation/completion without displaying type-checking noise.
+            for _, is_pull in ipairs({ false, true }) do
+              local ns = vim.lsp.diagnostic.get_namespace(client.id, is_pull)
+              vim.diagnostic.enable(false, { ns_id = ns })
+            end
+          end)
+        end,
+      },
       servers = {
         -- LazyVim's Python extra enables BasedPyright and Ruff.
         -- Keep Jedi/pylsp from answering the same navigation requests.

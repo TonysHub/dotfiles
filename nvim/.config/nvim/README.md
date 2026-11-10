@@ -10,6 +10,8 @@ are recorded in `lazy-lock.json`; AI adapters have exact npm versions and a
 - BasedPyright provides definitions, references, completion, and type analysis.
 - Native Ruff provides lint diagnostics, import organization, and formatting.
 - `pylsp` is disabled so it does not compete with BasedPyright.
+- BasedPyright's diagnostic display is disabled; navigation and completion stay
+  enabled, and Ruff's lint diagnostics remain visible.
 - `gd`, `gr`, and the existing completion/formatting bindings are unchanged.
 
 Interpreter discovery respects an explicit LSP `pythonPath` first, then an

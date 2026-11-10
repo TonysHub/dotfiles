@@ -2,6 +2,9 @@ return {
   {
     "avante-corp/avante.nvim",
     tag = "v0.5.0",
+    keys = {
+      { "<leader>aa", "<cmd>AvanteAsk<cr>", desc = "Ask Avante", mode = { "n", "x" } },
+    },
     build = function(plugin)
       -- Use upstream's release libraries; no local Rust toolchain is needed.
       local version = dofile(plugin.dir .. "/lua/avante/version.lua")

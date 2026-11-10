@@ -60,7 +60,8 @@ Use `:AvanteSwitchProvider` to select `codex` instead.
 | `:Sidekick cli send msg="{selection}"` | Send visual context to a CLI |
 | `:Sidekick cli prompt` | Pick a context-aware CLI prompt |
 
-Avante's automatic key mappings and suggestions are disabled. Sidekick's Next
+Press `<leader>aa` (Space, a, a) in normal or visual mode to open Avante.
+Avante's other automatic key mappings and suggestions are disabled. Sidekick's Next
 Edit Suggestions are disabled, preserving existing Copilot and completion
 bindings. Existing theme and keymap source files are unchanged. Sidekick uses
 tmux for terminal persistence; its Codex command preserves terminal scrollback.

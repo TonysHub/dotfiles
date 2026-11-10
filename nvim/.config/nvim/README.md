@@ -62,8 +62,24 @@ Use `:AvanteSwitchProvider` to select `codex` instead.
 | `:Sidekick cli send msg="{selection}"` | Send visual context to a CLI |
 | `:Sidekick cli prompt` | Pick a context-aware CLI prompt |
 
-Press `<leader>aa` (Space, a, a) in normal or visual mode to open Avante.
-Avante's other automatic key mappings and suggestions are disabled. Sidekick's Next
+Press `<leader>a` (Space, a) to see the **Avante** WhichKey menu:
+
+| Key after Space, a | Action |
+| --- | --- |
+| `a` | Ask Avante (normal / visual) |
+| `c` / `n` | Chat / new chat |
+| `e` | Edit selection (normal / visual) |
+| `f` / `t` | Focus / toggle sidebar |
+| `p` | Provider (Claude / Codex) |
+| `m` | Model |
+| `r` | Reasoning effort |
+| `o` | Agent / permission mode (separate from effort) |
+| `s` / `h` | Agent sessions / Avante chat history |
+| `x` / `C` | Stop request / clear chat |
+
+Model, effort, and mode shortcuts open the sidebar if needed. Available options
+come from the current ACP agent and model.
+Avante's automatic key mappings and suggestions are disabled. Sidekick's Next
 Edit Suggestions are disabled, preserving existing Copilot and completion
 bindings. Existing theme and keymap source files are unchanged. Sidekick uses
 tmux for terminal persistence; its Codex command preserves terminal scrollback.

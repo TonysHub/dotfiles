@@ -1,9 +1,56 @@
+local function select_acp(category, prompt)
+  local sidebar = require("avante").get(false)
+  if not sidebar or not sidebar:is_open() then
+    require("avante.api").ask()
+  end
+  require("avante.acp_config_selector").open(category, prompt)
+end
+
 return {
+  {
+    "folke/which-key.nvim",
+    opts = {
+      spec = {
+        { "<leader>a", group = "Avante", mode = { "n", "x" } },
+      },
+    },
+  },
   {
     "avante-corp/avante.nvim",
     tag = "v0.5.0",
     keys = {
       { "<leader>aa", "<cmd>AvanteAsk<cr>", desc = "Ask Avante", mode = { "n", "x" } },
+      { "<leader>ac", "<cmd>AvanteChat<cr>", desc = "Chat" },
+      { "<leader>an", "<cmd>AvanteChatNew<cr>", desc = "New chat" },
+      { "<leader>ae", "<cmd>AvanteEdit<cr>", desc = "Edit selection", mode = { "n", "x" } },
+      { "<leader>af", "<cmd>AvanteFocus<cr>", desc = "Focus sidebar" },
+      { "<leader>at", "<cmd>Avante toggle<cr>", desc = "Toggle sidebar" },
+      { "<leader>ap", "<cmd>AvanteSwitchProvider<cr>", desc = "Provider (Claude / Codex)" },
+      {
+        "<leader>am",
+        function()
+          select_acp("model", "Avante model> ")
+        end,
+        desc = "Model",
+      },
+      {
+        "<leader>ar",
+        function()
+          select_acp("thought_level", "Avante reasoning effort> ")
+        end,
+        desc = "Reasoning effort",
+      },
+      {
+        "<leader>ao",
+        function()
+          select_acp("mode", "Avante agent mode> ")
+        end,
+        desc = "Agent / permission mode",
+      },
+      { "<leader>as", "<cmd>Avante acp sessions<cr>", desc = "Agent sessions" },
+      { "<leader>ah", "<cmd>Avante resume<cr>", desc = "Chat history" },
+      { "<leader>ax", "<cmd>AvanteStop<cr>", desc = "Stop request" },
+      { "<leader>aC", "<cmd>AvanteClear<cr>", desc = "Clear chat" },
     },
     build = function(plugin)
       -- Use upstream's release libraries; no local Rust toolchain is needed.

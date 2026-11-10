@@ -61,6 +61,29 @@ nnoremap("<leader><Tab>", "<C-^>")
 nnoremap("<leader>y", [["+y]])
 vnoremap("<leader>y", [["+y]])
 
+-- paste clipboard with its common indent stripped (e.g. code copied out of Claude Code)
+nnoremap("<leader>v", function()
+  local lines = vim.split(vim.fn.getreg("+"), "\n", { plain = true })
+  if lines[#lines] == "" then
+    table.remove(lines)
+  end
+  local indent
+  for _, line in ipairs(lines) do
+    if line:find("%S") then
+      local n = #line:match("^%s*")
+      indent = indent and math.min(indent, n) or n
+    end
+  end
+  lines = vim.tbl_map(function(line)
+    return (line:sub((indent or 0) + 1):gsub("%s+$", ""))
+  end, lines)
+  if vim.api.nvim_buf_line_count(0) == 1 and vim.api.nvim_get_current_line() == "" then
+    vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
+  else
+    vim.api.nvim_put(lines, "l", true, true)
+  end
+end, { desc = "Paste clipboard dedented" })
+
 -- select all
 -- vnoremap("<leader>g", "ggVG<CR>", silent)
 -- nnoremap("<leader>g", "ggVG<CR>", silent)

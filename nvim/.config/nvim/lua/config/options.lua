@@ -48,15 +48,8 @@ vim.g.copilot_assume_mapped = true
 vim.cmd([[
   augroup FileTypeOverrides
   autocmd!
-  autocmd FileType javascript setlocal shiftwidth=2
-  autocmd FileType javascriptreact setlocal shiftwidth=2
-  autocmd FileType typescript setlocal shiftwidth=2
-  autocmd FileType typescriptreact setlocal shiftwidth=2
-  autocmd FileType json setlocal shiftwidth=2
-  autocmd FileType yaml setlocal shiftwidth=2
-  autocmd FileType html setlocal shiftwidth=2
-  autocmd FileType css setlocal shiftwidth=2
-  autocmd FileType lua setlocal shiftwidth=2
+  autocmd FileType javascript,javascriptreact,typescript,typescriptreact,json,jsonc,yaml,html,css,scss,less,svelte,vue,lua,markdown,graphql
+        \ setlocal shiftwidth=2 tabstop=2 softtabstop=2
   augroup END
 ]])
 

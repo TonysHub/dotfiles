@@ -17,6 +17,16 @@ return {
         -- LazyVim's Python extra enables BasedPyright and Ruff.
         -- Keep Jedi/pylsp from answering the same navigation requests.
         pylsp = { enabled = false },
+        ruff = {
+          init_options = {
+            settings = {
+              lint = {
+                -- Django models commonly declare mutable class attributes.
+                ignore = { "RUF012" },
+              },
+            },
+          },
+        },
         basedpyright = {
           before_init = function(_, config)
             local python = require("config.python").interpreter(config.root_dir)
@@ -32,6 +42,9 @@ return {
               analysis = {
                 diagnosticMode = "openFilesOnly",
                 typeCheckingMode = "standard",
+                -- Suppress diagnostics at the source so pickers stay quiet too.
+                -- Analysis still powers completion, hover, and navigation.
+                ignore = { "**" },
               },
             },
           },

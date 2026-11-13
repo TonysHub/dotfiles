@@ -95,10 +95,45 @@ return {
       "MunifTanjim/nui.nvim",
       { "ColinKennedy/mega.cmdparse", dependencies = { "ColinKennedy/mega.logging" } },
     },
+    config = function(_, opts)
+      -- v0.5.0 has no option to hide this panel. Keep file context intact,
+      -- but omit its window and the space reserved for it.
+      local Sidebar = require("avante.sidebar")
+      Sidebar.create_selected_files_container = function() end
+      Sidebar.get_selected_files_container_height = function() return 0 end
+      -- Keep ACP command chatter out of the conversation, without changing
+      -- execution, history, or the details needed for permission decisions.
+      local get_message_lines = Sidebar._get_message_lines
+      Sidebar._get_message_lines = function(self, ctx, message, messages, ignore_record_prefix)
+        local call = message.acp_tool_call
+        local awaiting_permission = self.permission_handler and self.permission_button_options
+        if call and not awaiting_permission then
+          if call.status == "completed" then return {} end
+          if call.status == "pending" or call.status == "in_progress" then
+            local Line = require("avante.ui.line")
+            return { Line:new({ { "Working…" } }) }
+          end
+        end
+        return get_message_lines(self, ctx, message, messages, ignore_record_prefix)
+      end
+      require("avante").setup(opts)
+    end,
     opts = function()
       local bin = vim.fn.stdpath("config") .. "/ai/node_modules/.bin/"
       return {
-        provider = "claude-code",
+        provider = "codex",
+        windows = {
+          width = 40,
+          ask = { start_insert = false },
+          edit = { start_insert = false },
+        },
+        mappings = {
+          sidebar = {
+            -- Leave Tab/Shift-Tab available for completion in the input.
+            switch_windows = "<C-w>w",
+            reverse_switch_windows = "<C-w>W",
+          },
+        },
         behaviour = {
           auto_set_keymaps = false,
           auto_suggestions = false,

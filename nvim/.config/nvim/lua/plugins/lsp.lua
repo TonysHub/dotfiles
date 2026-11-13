@@ -15,8 +15,39 @@ return {
       },
       servers = {
         -- LazyVim's Python extra enables BasedPyright and Ruff.
-        -- Keep Jedi/pylsp from answering the same navigation requests.
-        pylsp = { enabled = false },
+        -- Jedi can resolve Django queryset results that BasedPyright cannot.
+        pylsp = {
+          before_init = function(_, config)
+            config.settings = config.settings or {}
+            config.settings.pylsp = config.settings.pylsp or {}
+            config.settings.pylsp.plugins = config.settings.pylsp.plugins or {}
+            config.settings.pylsp.plugins.jedi = {
+              environment = require("config.python").interpreter(config.root_dir),
+            }
+          end,
+          on_init = function(client)
+            -- Use pylsp only for definitions; avoid duplicate completion/hover.
+            for capability in pairs(client.server_capabilities) do
+              if capability:match("Provider$") and capability ~= "definitionProvider" then
+                client.server_capabilities[capability] = nil
+              end
+            end
+          end,
+          settings = {
+            pylsp = {
+              plugins = {
+                pycodestyle = { enabled = false },
+                pyflakes = { enabled = false },
+                mccabe = { enabled = false },
+                flake8 = { enabled = false },
+                pylint = { enabled = false },
+                pydocstyle = { enabled = false },
+                autopep8 = { enabled = false },
+                yapf = { enabled = false },
+              },
+            },
+          },
+        },
         ruff = {
           init_options = {
             settings = {

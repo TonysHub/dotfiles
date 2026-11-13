@@ -1,0 +1,5 @@
+WRN 2026-11-11T15:44:59.540 ?.30852    server_start:197: Failed to start server: operation not permitted: /var/folders/y8/w9ldfy710bv13_62tz87x2180000gn/T/nvim.tonylee/kQsJ0S/nvim.30852.0
+WRN 2026-11-11T15:51:57.618 ?.46312    server_start:197: Failed to start server: operation not permitted: /var/folders/y8/w9ldfy710bv13_62tz87x2180000gn/T/nvim.tonylee/xgGCKW/nvim.46312.0
+WRN 2026-11-11T15:55:05.888 ?.55825    server_start:197: Failed to start server: operation not permitted: /var/folders/y8/w9ldfy710bv13_62tz87x2180000gn/T/nvim.tonylee/UugaER/nvim.55825.0
+WRN 2026-11-11T16:12:42.672 ?.85346    server_start:197: Failed to start server: operation not permitted: /var/folders/y8/w9ldfy710bv13_62tz87x2180000gn/T/nvim.tonylee/eHYJNJ/nvim.85346.0
+WRN 2026-11-11T16:16:17.484 ?.97902    server_start:197: Failed to start server: operation not permitted: /var/folders/y8/w9ldfy710bv13_62tz87x2180000gn/T/nvim.tonylee/BGSjzQ/nvim.97902.0
